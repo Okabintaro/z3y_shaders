@@ -286,7 +286,10 @@ namespace z3y.Shaders
                 }
                 else
                 {
-                    p.drawAction = DrawShaderProperty;
+                    DrawCustomProperty(prop, p);
+                    if (p.drawAction == null) {
+                        p.drawAction = DrawShaderProperty;
+                    }
                 }
 
                 if (prop.type == MaterialProperty.PropType.Texture && (flags & MaterialProperty.PropFlags.NoScaleOffset) != MaterialProperty.PropFlags.NoScaleOffset)
@@ -425,6 +428,9 @@ namespace z3y.Shaders
         }
 
 
+
+        protected virtual void DrawCustomProperty(MaterialProperty unityProperty, Property property) {
+        }
 
         public void DrawShaderProperty(Property property, MaterialEditor editor, MaterialProperty[] unityProperty) => editor.ShaderProperty(unityProperty[property.index], property.guiContent);
         public void DrawShaderPropertyVector(Property property, MaterialEditor editor, MaterialProperty[] unityProperty)
